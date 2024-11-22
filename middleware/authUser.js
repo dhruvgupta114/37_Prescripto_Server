@@ -3,14 +3,14 @@ import jwt from "jsonwebtoken";
 // user authentication middleware
 const authUser = async (req, res, next) => {
   try {
-    const { token } = req.headers;
-    if (!token) {
+    const { utoken } = req.headers;
+    if (!utoken) {
       return res.json({
         success: false,
         message: "Not Authorized Login Again",
       });
     }
-    const decodeToken = jwt.verify(token, process.env.JWT_SECRET);
+    const decodeToken = jwt.verify(utoken, process.env.JWT_SECRET);
 
     req.body.userId = decodeToken.id;
 
